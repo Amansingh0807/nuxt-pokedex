@@ -500,6 +500,8 @@ const totalPages = computed(() => {
 const paginatedPokemon = computed(() => {
   if (!filteredPokemon.value) return [];
   const start = (currentPage.value - 1) * pageSize.value;
+
+  // const start = 0;
   return filteredPokemon.value.slice(start, start + pageSize.value);
 });
 
@@ -526,6 +528,10 @@ const filteredPokemon = computed(() => {
 
   return filtered;
 });
+
+watch([search, selectedType], () => {
+  currentPage.value = 1
+})
 
 const nextPage = () => {
   if (currentPage.value < totalPages.value) {
